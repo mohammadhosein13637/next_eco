@@ -8,13 +8,17 @@ import Banner from '../components/Banner/Banner'
 import Subscribe from "../components/Subscribe/Subscribe";
 import Footer from "../components/Footer/Footer";
 import Testimonials from '../components/Testimonials/Testimonials'
+import { useRouter } from "next/navigation";
+
+
 
 import AOS from "aos";
 import "aos/dist/aos.css";
 
 
-export default function page() {
+export default function Page() {
 
+  const router = useRouter()
 
   useEffect(() => {
     AOS.init({
@@ -29,7 +33,7 @@ export default function page() {
   return (
     <>
       <div className="bg-white dark:bg-gray-900 text-zinc-700 dark:text-white duration-200">
-        <Navbar />
+        <Navbar  />
         <Hero />
         <Products />
         <TopProducts />
