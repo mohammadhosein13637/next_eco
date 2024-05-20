@@ -1,6 +1,5 @@
 // OrdersPage.js
 import React from 'react';
-
 const OrdersPage = () => {
     const orders = [
         { id: 1, status: 'Pending' },
