@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Subscribe Background */
+
+.subscribe-bg {
+  background-image: url("./assets/website/orange-pattern.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: "100%";
+  width: "100%";
+}
+
+
+/* Footer Background */
+
+.footer-bg {
+  background-image: url("./assets/website/footer-pattern.jpg");
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: "100%";
+  width: "100%";
+}
+
+/* Second Slider Style */
+
+.swiper-slide {
+  padding-bottom: 40px;
+}
+
+.mySwiper .swiper-pagination-bullet {
+  background-color: #3f3f46;
+  width: 12px; 
+  height: 12px; 
+}
+
+
+.mySwiper .swiper-pagination-bullet-active {
+  background-color: #fea928 !important; 
+}
