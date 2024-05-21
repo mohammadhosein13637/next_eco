@@ -7,7 +7,9 @@ import Reveal from "react-awesome-reveal";
 import { keyframes } from "@emotion/react";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
-import '../global.css'
+import { baseUrl } from "../constants/Config";
+import '../global.css';
+
 const bottomToTopAnimation = keyframes`
   from {
     opacity: 0;
@@ -25,7 +27,14 @@ const DashboardPage = () => {
   const [color, setColor] = useState("");
   const [size, setSize] = useState("");
   const [description, setDescription] = useState("");
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const router = useRouter();
+
+  const handleLinkChange = (e) => {
+    setLink(e.target.value);
+  };
+
   const handleColorChange = (e) => {
     setColor(e.target.value);
   };
@@ -38,17 +47,61 @@ const DashboardPage = () => {
     setDescription(e.target.value);
   };
 
-  const handleSubmit = () => {
-    if (Cookies.get("token") == "" || Cookies.get("token") == null) {
-      router.push("/ordering/auth/login");
-    } else {
-      console.log("Color:", color);
-      console.log("Size:", size);
-      console.log("Description:", description);
+  const isValidURL = (string) => {
+    try {
+      new URL(string);
+      return true;
+    } catch (_) {
+      return false;
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError(""); // Clear previous errors
+    setSuccess(""); // Clear previous success message
+
+    if (!isValidURL(link)) {
+      setError("Please enter a valid URL.");
+      return;
     }
 
-    // Here you can submit the inputs to the backend
-    // For demonstration purposes, we'll just log the values
+    if (!Cookies.get("token")) {
+      router.push("/ordering/auth/login");
+      return;
+    }
+
+    try {
+      const response = await fetch(`${baseUrl}/store/orders/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `JWT ${Cookies.get('token')}`
+        },
+        body: JSON.stringify({
+          link: link,
+          size: size,
+          color: color,
+          description: description
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const result = await response.json();
+      console.log('Success:', result);
+      setSuccess("Order submitted successfully!"); // Set success message
+      // Optionally, you can add logic to handle the response, e.g., reset form fields
+      setLink("");
+      setColor("");
+      setSize("");
+      setDescription("");
+    } catch (error) {
+      console.error('Error:', error);
+      setError("An error occurred while submitting the order. Please try again.");
+    }
   };
 
   return (
@@ -62,10 +115,11 @@ const DashboardPage = () => {
               <input
                 type="text"
                 placeholder="Enter Link..."
-                value={color}
-                onChange={handleColorChange}
+                value={link}
+                onChange={handleLinkChange}
                 className="w-[80%] sm:w-[90%] px-5 h-10 sm:h-12 bg-[#f3f4f6] border-b-2 border-primary/50 rounded-full focus:outline-none focus:bg-white focus:text-zinc-700 text-zinc-700 transition duration-500"
               />
+              {error && <p className="text-red-500 mt-2">{error}</p>}
             </div>
           </Reveal>
           <Reveal keyframes={bottomToTopAnimation} delay={100}>
@@ -111,6 +165,7 @@ const DashboardPage = () => {
             >
               Submit
             </button>
+            {success && <p className="text-green-500 mt-2">{success}</p>}
           </div>
         </div>
       </div>

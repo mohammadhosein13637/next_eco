@@ -9,7 +9,7 @@ import 'swiper/css/autoplay';
 import 'swiper/css/effect-coverflow';
 import Image from 'next/image'
 
-
+import offer from '../../../../public/assets/image/offer.png'
 
 const TestimonialData = [
   {
@@ -98,7 +98,7 @@ const Testimonials = () => {
                         alt=""
                         className="rounded-full w-20 h-20"
                       /> */}
-                      <Image src={data.img}
+                      <Image src={offer}
                         alt=""
                         className="rounded-full w-20 h-20" fill/>
                     </div>

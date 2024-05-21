@@ -22,7 +22,7 @@ const LoginPage = () => {
       Cookies.set("phone", phone);
       Cookies.get("otp");
       console.log(data.otp);
-      router.push("/auth/login/verify");
+      router.push("/ordering/auth/login/verify");
     } catch (error) {
       console.error("Error logging in:", error);
       // Handle error (e.g., display error message to the user)

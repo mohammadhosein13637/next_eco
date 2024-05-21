@@ -5,6 +5,7 @@ import Img2 from "../../assets/women/women2.jpg";
 import Img3 from "../../assets/women/women3.jpg";
 import Img4 from "../../assets/women/women4.jpg";
 import { FaStar } from "react-icons/fa6";
+import offer from '../../../../public/assets/image/offer.png'
 
 const ProductsData = [
   {
@@ -77,7 +78,7 @@ const Products = () => {
                 key={data.id}
                 className="space-y-3"
               >
-                <Image src={data.img} className="h-[220px] w-[150px] object-cover rounded-md" alt=""></Image>
+                <Image src={offer} className="h-[220px] w-[150px] object-cover rounded-md" alt=""></Image>
                 {/* <img
                   src={data.img}
                   alt=""

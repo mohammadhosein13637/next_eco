@@ -4,6 +4,7 @@ import Img1 from "../../assets/shirt/shirt.png";
 import Img2 from "../../assets/shirt/shirt2.png";
 import Img3 from "../../assets/shirt/shirt3.png";
 import { FaStar } from "react-icons/fa";
+import offer from '../../../../public/assets/image/offer.png'
 
 const ProductsData = [
   {
@@ -55,7 +56,7 @@ const TopProducts = ({ handleOrderPopup }) => {
             >
               {/* image section */}
               <div className="h-[100px]">
-                <Image src={data.img} className="max-w-[140px] block mx-auto transform -translate-y-20 group-hover:scale-105 duration-300 drop-shadow-md"></Image>
+                <Image src={offer} className="max-w-[140px] block mx-auto transform -translate-y-20 group-hover:scale-105 duration-300 drop-shadow-md"></Image>
                 {/* <img
                   src={data.img}
                   alt=""

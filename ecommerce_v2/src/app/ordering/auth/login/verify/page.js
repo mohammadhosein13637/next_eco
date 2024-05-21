@@ -5,14 +5,14 @@ import { useRouter } from "next/navigation";
 import styles from "./VerifyOTPPage.module.css"; // Import CSS module for styling
 import Cookies from "js-cookie";
 import { Cookie } from "next/font/google";
-
+import { baseUrl } from "@/app/ordering/constants/Config";
 const VerifyOTPPage = () => {
   const router = useRouter();
   const [enteredOTP, setEnteredOTP] = useState("");
 
   const handleVerifyOTP = async () => {
     try {
-      const response = await fetch("http://127.0.0.1:8000/auth/login/", {
+      const response = await fetch(`${baseUrl}/auth/verify/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -23,9 +23,9 @@ const VerifyOTPPage = () => {
         }),
       });
       const data = await response.json();
-      Cookies.set("token", data.accsses_token);
+      Cookies.set("token", data.access_token);
       // Save access token in cookies (code for saving in cookies will be added later)
-      router.push("/dashboard");
+      router.push("/ordering/dashboard");
     } catch (error) {
       console.error("Error verifying OTP:", error);
       // Handle error (e.g., display error message to the user)

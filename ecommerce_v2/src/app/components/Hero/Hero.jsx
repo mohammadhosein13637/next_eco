@@ -10,6 +10,7 @@ import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/autoplay'
+import offer from '../../../../public/assets/image/offer.png'
 
 
 const ImageList = [
@@ -87,7 +88,7 @@ function Hero() {
                     className="relative z-10"
                   >
                     <Image
-                      src={data.img}
+                      src={offer}
                       alt=""
                       className="w-[300px] h-[300px] sm:h-[450px] sm:w-[450px] sm:scale-105 lg:scale-120 object-contain mx-auto"
                     ></Image>
