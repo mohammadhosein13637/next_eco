@@ -39,7 +39,7 @@ const NavBar = () => {
     if (currentPath && !foundComponent) {
         router.push('/404')
     }
-  }, [router]);
+  }, [router ,findSlugMatchingCmp]);
 
   const cmp = findSlugMatchingCmp().component
   return (

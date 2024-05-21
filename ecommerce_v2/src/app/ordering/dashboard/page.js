@@ -45,13 +45,13 @@ const TabBar = () => {
         setActiveTab(tabNumber);
         switch (tabNumber) {
             case 1:
-                window.history.pushState({}, '', '/dashboard/linker');
+                window.history.pushState({}, '', '/ordering/linker');
                 break;
             case 2:
-                window.history.pushState({}, '', '/dashboard/orders');
+                window.history.pushState({}, '', '/ordering/orders');
                 break;
             case 3:
-                window.history.pushState({}, '', '/dashboard/profile');
+                window.history.pushState({}, '', '/ordering/profile');
                 break;
             default:
                 break;

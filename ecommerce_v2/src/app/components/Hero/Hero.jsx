@@ -52,7 +52,7 @@ function Hero() {
           className="mySwiper"
         >
           {ImageList.map((data) => (
-            <SwiperSlide>
+            <SwiperSlide key={""}>
               <div className="grid grid-cols-1 sm:grid-cols-2">
                 {/* text content section */}
                 <div className="flex flex-col justify-center gap-4 pt-12 sm:pt-0 text-center sm:text-left order-2 sm:order-1 relative z-10">

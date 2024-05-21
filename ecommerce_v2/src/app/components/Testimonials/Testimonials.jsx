@@ -7,6 +7,8 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/autoplay';
 import 'swiper/css/effect-coverflow';
+import Image from 'next/image'
+
 
 
 const TestimonialData = [
@@ -84,18 +86,21 @@ const Testimonials = () => {
             }}
           >
             {TestimonialData.map((data) => (
-              <SwiperSlide>
+              <SwiperSlide key={""}>
                 <div className="my-6">
                   <div
                     key={data.id}
                     className="flex flex-col gap-4 shadow-lg py-8 px-6 mx-4 rounded-xl dark:bg-gray-800 bg-primary/10 relative"
                   >
                     <div className="mb-4">
-                      <img
+                      {/* <img
                         src={data.img}
                         alt=""
                         className="rounded-full w-20 h-20"
-                      />
+                      /> */}
+                      <Image src={data.img}
+                        alt=""
+                        className="rounded-full w-20 h-20" fill/>
                     </div>
                     <div className="flex flex-col items-center gap-4">
                       <div className="space-y-3">

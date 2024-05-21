@@ -4,10 +4,13 @@ const nextConfig = {
         return [
           {
             source: '/',
-            destination: '/dashboard',
-            permanent: true, // This makes the redirection permanent
+            destination: '/main',
+            permanent: true, 
           },
         ];
+      },
+      images: {
+        domains: ['picsum.photos'],
       },
 };
 

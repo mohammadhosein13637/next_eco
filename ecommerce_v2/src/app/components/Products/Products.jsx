@@ -77,7 +77,7 @@ const Products = () => {
                 key={data.id}
                 className="space-y-3"
               >
-                <Image src={data.img} className="h-[220px] w-[150px] object-cover rounded-md"></Image>
+                <Image src={data.img} className="h-[220px] w-[150px] object-cover rounded-md" alt=""></Image>
                 {/* <img
                   src={data.img}
                   alt=""
