@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 import { useRouter } from "next/router";
 import Link from "next/link";
-const { default: DashboardPage } = require("./(components)/DashboardPage");
+const { default: DashboardPage } = require("./(components)/LinkerPage");
 
 const NavBar = () => {
   const routes = [

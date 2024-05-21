@@ -1,10 +1,10 @@
 // DashboardPageWrapper.js
 import dynamic from 'next/dynamic';
 
-const LinkerPage = dynamic(() => import('../../(components)/DashboardPage'), { ssr: false });
+const LinkerPage = dynamic(() => import('../../(components)/LinkerPage'), { ssr: false });
 
-const DashboardPageWrapper = () => {
+const LinkerWrapper = () => {
   return <LinkerPage />;
 };
 
-export default DashboardPageWrapper;
+export default LinkerWrapper;
