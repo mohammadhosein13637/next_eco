@@ -75,16 +75,15 @@ export default function OrdersPage() {
                     Order #{order.id}
                   </span>
                 </a>
-                <div className="px-5 pb-5">
-                  <a
+                <div className="px-5 pb-5 ">
+                  {/* <a
                     href={order.link}
                     target="_blank"
                     rel="noopener noreferrer"
+                    className="text-lg font-bold text-dark tracking-tight"
                   >
-                    <h5 className="text-lg font-bold text-primary-dark tracking-tight">
                       {order.link}
-                    </h5>
-                  </a>
+                  </a> */}
                   <div className="mt-2 mb-5">
                     <p className="text-gray-700">
                       <strong>Size:</strong> {order.size}

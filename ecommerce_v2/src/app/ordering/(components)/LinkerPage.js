@@ -124,7 +124,7 @@ const DashboardPage = () => {
                   onChange={handleLinkChange}
                   className="w-[80%] sm:w-[90%] px-5 h-10 sm:h-12 bg-white border-b-2 border-primary/50 rounded-full focus:outline-none focus:bg-white focus:text-gray-700 text-gray-700 transition duration-500"
                 />
-                {error && <p className="text-red-500 mt-2">{error}</p>}
+                {error && <p className="text-red-500 ">{error}</p>}
               </div>
             </Reveal>
             <Reveal keyframes={bottomToTopAnimation} delay={100}>
