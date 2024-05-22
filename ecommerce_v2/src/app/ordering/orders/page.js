@@ -1,100 +1,113 @@
-// OrdersPage.js
 "use client";
-import React from "react";
-// Animations
-import { Fade } from "react-awesome-reveal";
-import Reveal from "react-awesome-reveal";
-import { keyframes } from "@emotion/react";
+import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { baseUrl } from "../constants/Config";
+import { useRouter } from "next/navigation";
+import NavBar from '../navbar/Navbar'
 
-const bottomToTopAnimation = keyframes`
-  from {
-    opacity: 0;
-    transform: translate3d(0, 100px, 0);
-  }
+export default function OrdersPage() {
+  const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState("");
 
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
-`;
-
-const OrdersPage = () => {
-  const orders = [];
-
-  React.useEffect(() => {
-    handleOrders();
-  }, []);
-  const handleOrders = async () => {
-    if (!Cookies.get("token")) {
+  const router = useRouter();
+  useEffect(() => {
+    if (
+      Cookies.get("token") == "" ||
+      Cookies.get("token") == null ||
+      Cookies.get("token") == "undefined"
+    ) {
       router.push("/ordering/auth/login");
-      return;
     }
+    const fetchOrders = async () => {
+      setLoading(true);
+      try {
+        const response = await fetch(`${baseUrl}/store/orders/`, {
+          headers: {
+            Authorization: `JWT ${Cookies.get("token")}`,
+          },
+        });
 
-    try {
-      const response = await fetch(`${baseUrl}/store/orders/`, {
-        method: "Get",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `JWT ${Cookies.get("token")}`,
-        },
-      });
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
+        if (response.ok) {
+          const data = await response.json();
+          setOrders(data);
+          setLoading(false);
+        } else {
+          console.error("Failed to fetch orders");
+          setLoading(false);
+        }
+      } catch (error) {
+        console.error("Error:", error);
       }
+    };
 
-      const result = await response.json();
+    fetchOrders();
+  }, []);
 
-      result.map((item) => {
-        orders.push(item);
-      });
-      orders.map((item) => {
-        console.log(item.id);
-      });
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
   return (
-    <div className="container flex flex-col items-center text-zinc-700 w-full h-screen mx-auto mt-32 Child:z-50">
-      <Fade>
-        <h1 className="text-3xl font-bold mb-4 text-center">Orders</h1>
-      </Fade>
-      <Reveal keyframes={bottomToTopAnimation}>
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-5 w-80 sm:w-96 flex-wrap">
-          {orders.map((order) => (
-            <div key={order.id} className="flex-1 w-full md:w-auto">
-              <div className="flex items-center justify-center bg-gray-200 w-80 sm:w-96 h-8 rounded-md text-center text-black">
-                {order.status}
-              </div>
-            </div>
-          ))}
-        </div>
-      </Reveal>
-      <Reveal keyframes={bottomToTopAnimation} delay={200}>
-        <div className="max-w-lg mx-auto">
-          <h2 className="text-xl font-bold mb-2 mt-10 text-center">
-            All Orders
-          </h2>
-          <ul className="w-[350px] sm:w-[500px] text-black">
-            <ul className="w-[350px] sm:w-[500px]">
-              {orders.map((order) => (
-                <li
-                  key={order.id}
-                  className="border-b border-gray-300 py-2 w-full"
-                  style={{ color: "black" }}
+    <div>
+      <NavBar tabnum={2}/>
+      <div className="min-h-screen bg-primary/40 p-6">
+        <h1 className="text-2xl font-bold mb-6 text-gray-800">Orders</h1>
+        {loading ? (
+          <div className="text-center text-gray-700">Loading...</div>
+        ) : (
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {orders.map((order) => (
+              <div
+                key={order.id}
+                className="relative mx-auto mb-6 flex w-full max-w-xs flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md"
+              >
+                <a
+                  className="relative mx-3 mt-3 flex h-20 overflow-hidden rounded-xl"
+                  href={order.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  Order ID: {order.id}
-                  {/* Add more order information here */}
-                </li>
-              ))}
-            </ul>
-          </ul>
-        </div>
-      </Reveal>
+                  <span className="absolute top-0 left-0 m-2 rounded-full bg-primary/40 px-2 text-center text-sm font-medium text-gray-700">
+                    Order #{order.id}
+                  </span>
+                </a>
+                <div className="px-5 pb-5">
+                  <a
+                    href={order.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <h5 className="text-lg font-bold text-primary-dark tracking-tight">
+                      {order.link}
+                    </h5>
+                  </a>
+                  <div className="mt-2 mb-5">
+                    <p className="text-gray-700">
+                      <strong>Size:</strong> {order.size}
+                    </p>
+                    <p className="text-gray-700">
+                      <strong>Color:</strong> {order.color}
+                    </p>
+                    <p className="text-gray-700">
+                      <strong>Description:</strong> {order.description}
+                    </p>
+                    <p className="text-gray-700">
+                      <strong>Customer ID:</strong> {order.customer}
+                    </p>
+                    <p className="text-gray-700">
+                      <strong>Created At:</strong>{" "}
+                      {new Date(order.created_at).toLocaleString()}
+                    </p>
+                    <p className="text-gray-700">
+                      <strong>Last Status:</strong> {order.last_status.status}{" "}
+                      at{" "}
+                      {new Date(
+                        order.last_status.status_change
+                      ).toLocaleString()}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
-};
-
-export default OrdersPage;
+}
