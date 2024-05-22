@@ -22,6 +22,12 @@ const VerifyOTPPage = () => {
           otp: Cookies.get("otp"),
         }),
       });
+      await fetch(`${baseUrl}/store/customers/me/`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       const data = await response.json();
       Cookies.set("token", data.access_token);
       // Save access token in cookies (code for saving in cookies will be added later)
@@ -54,7 +60,7 @@ const VerifyOTPPage = () => {
               </label>
               <div className="mt-1 space-y-6">
                 <input
-                  id="otp"  
+                  id="otp"
                   name="otp"
                   type="text"
                   autoComplete="off"
@@ -68,7 +74,7 @@ const VerifyOTPPage = () => {
 
             <div>
               <button
-              onClick={handleVerifyOTP}
+                onClick={handleVerifyOTP}
                 type="submit"
                 className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 space-y-6"
               >
