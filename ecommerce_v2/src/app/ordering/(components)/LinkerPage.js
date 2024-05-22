@@ -93,6 +93,7 @@ const DashboardPage = () => {
       const result = await response.json();
       console.log("Success:", result);
       setSuccess("Order submitted successfully!"); // Set success message
+      router.push('/ordering/orders')
       // Optionally, you can add logic to handle the response, e.g., reset form fields
       setLink("");
       setColor("");
@@ -165,13 +166,13 @@ const DashboardPage = () => {
               </div>
             </Reveal>
             <div className="flex flex-col items-center gap-1 w-[350px]">
+              {/* {success && <p className="text-green-500 ">{success}</p>} */}
               <button
                 onClick={handleSubmit}
-                className="bg-zinc-700 text-white w-[80%] sm:w-[90%] h-10 sm:h-12 rounded-full hover:md:bg-primary/40 hover:md:text-gray-700 mt-5 transition duration-500"
+                className="bg-zinc-700 text-white w-[80%] sm:w-[90%] h-10 sm:h-12 rounded-full hover:md:bg-primary/40 hover:md:text-gray-700 mt-3 transition duration-500"
               >
                 Submit
               </button>
-              {success && <p className="text-green-500 mt-2">{success}</p>}
             </div>
           </div>
         </div>
