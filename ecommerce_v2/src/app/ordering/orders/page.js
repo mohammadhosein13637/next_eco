@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { baseUrl } from "../constants/Config";
 import { useRouter } from "next/navigation";
-import NavBar from '../navbar/Navbar'
-
+import NavBar from "../navbar/Navbar";
+import Link from "next/link";
 export default function OrdersPage() {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState("");
@@ -42,10 +42,13 @@ export default function OrdersPage() {
 
     fetchOrders();
   }, []);
+  const getStatusText = (status) => {
+    return status === "P" ? "PENDING" : status === "A" ? "Accepted" : "Unknown";
+  };
 
   return (
     <div>
-      <NavBar tabnum={2}/>
+      <NavBar tabnum={2} />
       <div className="min-h-screen bg-primary/40 p-6">
         <h1 className="text-2xl font-bold mb-6 text-gray-800">Orders</h1>
         {loading ? (
@@ -57,6 +60,11 @@ export default function OrdersPage() {
                 key={order.id}
                 className="relative mx-auto mb-6 flex w-full max-w-xs flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md"
               >
+                <Link href={`/ordering/orders/${order.id}/invoice`}className="w-6/6">
+                <div class="bg-primary/40 hover:bg-primary/55 text-white font-bold py-2 px-4 border-b-4 border-gray-500 hover:border-gray-700 rounded text-center	" onClick={()=>Cookies.set("orderId",order.id)}>
+                  Invoice
+                </div>
+                </Link>
                 <a
                   className="relative mx-3 mt-3 flex h-20 overflow-hidden rounded-xl"
                   href={order.link}
@@ -95,8 +103,8 @@ export default function OrdersPage() {
                       {new Date(order.created_at).toLocaleString()}
                     </p>
                     <p className="text-gray-700">
-                      <strong>Last Status:</strong> {order.last_status.status}{" "}
-                      at{" "}
+                      <strong>Last Status:</strong>{" "}
+                      {getStatusText(order.last_status.status)} at{" "}
                       {new Date(
                         order.last_status.status_change
                       ).toLocaleString()}

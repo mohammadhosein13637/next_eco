@@ -29,7 +29,7 @@ const NavBar = ({ tabnum }) => {
                 d="M15 19l-7-7 7-7"
               ></path>
             </svg>
-            <div className="text-lg font-bold">BOBO SHOP</div>
+            <div className="text-lg font-bold text-gray-700">BOBO SHOP</div>
           </div>
           <div className="hidden md:flex space-x-4">
             <Link href="/ordering/linker">
