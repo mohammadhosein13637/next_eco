@@ -1,4 +1,3 @@
-// DashboardPage.js
 "use client";
 import React, { useState } from "react";
 // Animations
@@ -9,7 +8,8 @@ import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import { baseUrl } from "../constants/Config";
 import "../global.css";
-import NavBar from '../navbar/Navbar'
+import NavBar from '../navbar/Navbar';
+
 const bottomToTopAnimation = keyframes`
   from {
     opacity: 0;
@@ -26,6 +26,7 @@ const DashboardPage = () => {
   const [link, setLink] = useState("");
   const [color, setColor] = useState("");
   const [size, setSize] = useState("");
+  const [quantity, setQuantity] = useState("");
   const [description, setDescription] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -41,6 +42,10 @@ const DashboardPage = () => {
 
   const handleSizeChange = (e) => {
     setSize(e.target.value);
+  };
+
+  const handleQuantityChange = (e) => {
+    setQuantity(e.target.value);
   };
 
   const handleDescriptionChange = (e) => {
@@ -82,6 +87,7 @@ const DashboardPage = () => {
           link: link,
           size: size,
           color: color,
+          quantity: quantity,
           description: description,
         }),
       });
@@ -98,6 +104,7 @@ const DashboardPage = () => {
       setLink("");
       setColor("");
       setSize("");
+      setQuantity("");
       setDescription("");
     } catch (error) {
       console.error("Error:", error);
@@ -108,71 +115,83 @@ const DashboardPage = () => {
   };
 
   return (
-    <div className="bg-primary/40 text-gray-700 w-full h-screen">
+    <div className="bg-primary/40 text-gray-700 w-full min-h-screen flex flex-col">
       <NavBar tabnum={1} />
-      <div className="flex justify-center items-center ">
-        <div className="container flex flex-col justify-center items-center lg:w-[350px] lg:h-[440px] mx-auto rounded-2xl mt-10 md:mt-32 lg:mt-20 z-50">
+      <div className="flex-grow flex justify-center items-center">
+        <div className="container flex flex-col justify-center items-center lg:w-[350px] lg:h-auto mx-auto rounded-2xl   z-50 p-4 bg-pramiry/40 ">
           <div className="flex flex-col items-center gap-1 w-full">
             <h1 className="text-2xl lg:text-5xl font-bold pb-6">Dashboard</h1>
             <Reveal keyframes={bottomToTopAnimation}>
-              <div className="flex flex-col items-center gap-1 w-[350px]">
+              <div className="flex flex-col items-center gap-1 w-full">
                 <span className="text-lg xl:text-xl font-bold">Link:</span>
                 <input
                   type="text"
                   placeholder="Enter Link..."
                   value={link}
                   onChange={handleLinkChange}
-                  className="w-[80%] sm:w-[90%] px-5 h-10 sm:h-12 bg-white border-b-2 border-primary/50 rounded-full focus:outline-none focus:bg-white focus:text-gray-700 text-gray-700 transition duration-500"
+                  className="w-full px-5 h-10 sm:h-12 bg-white border-b-2 border-primary/50 rounded-full focus:outline-none focus:bg-white focus:text-gray-700 text-gray-700 transition duration-500"
                 />
                 {error && <p className="text-red-500 ">{error}</p>}
               </div>
             </Reveal>
             <Reveal keyframes={bottomToTopAnimation} delay={100}>
-              <div className="flex flex-col items-center gap-1 w-[350px]">
+              <div className="flex flex-col items-center gap-1 w-full">
                 <span className="text-lg xl:text-xl font-bold">Color:</span>
                 <input
                   type="text"
                   placeholder="Enter Color..."
                   value={color}
                   onChange={handleColorChange}
-                  className="w-[80%] sm:w-[90%] px-5 h-10 sm:h-12 bg-white border-b-2 border-primary/50 rounded-full focus:outline-none focus:bg-white focus:text-gray-700 text-gray-700 transition duration-500"
+                  className="w-full px-5 h-10 sm:h-12 bg-white border-b-2 border-primary/50 rounded-full focus:outline-none focus:bg-white focus:text-gray-700 text-gray-700 transition duration-500"
                 />
               </div>
             </Reveal>
             <Reveal keyframes={bottomToTopAnimation} delay={200}>
-              <div className="flex flex-col items-center gap-1 w-[350px]">
-                <span className="text-lg xl:text-xl font-bold">Size:</span>
-                <input
-                  type="text"
-                  placeholder="Enter Size..."
-                  value={size}
-                  onChange={handleSizeChange}
-                  className="w-[80%] sm:w-[90%] px-5 h-10 sm:h-12 bg-white border-b-2 border-primary/50 rounded-full focus:outline-none focus:bg-white focus:text-gray-700 text-gray-700 transition duration-500"
-                />
+              <div className="flex flex-col items-center gap-1 w-full">
+                <div className="flex gap-2 w-full">
+                  <div className="flex flex-col w-1/2">
+                    <span className="text-lg xl:text-xl font-bold text-center">Size:</span>
+                    <input
+                      type="text"
+                      placeholder="Enter Size..."
+                      value={size}
+                      onChange={handleSizeChange}
+                      className="w-full px-5 h-10 sm:h-12 bg-white border-b-2 border-primary/50 rounded-full focus:outline-none focus:bg-white focus:text-gray-700 text-gray-700 transition duration-500"
+                    />
+                  </div>
+                  <div className="flex flex-col w-1/2">
+                    <span className="text-lg xl:text-xl font-bold text-center">Quantity:</span>
+                    <input
+                      type="number"
+                      placeholder="Enter Quantity..."
+                      value={quantity}
+                      onChange={handleQuantityChange}
+                      className="w-full px-5 h-10 sm:h-12 bg-white border-b-2 border-primary/50 rounded-full focus:outline-none focus:bg-white focus:text-gray-700 text-gray-700 transition duration-500"
+                    />
+                  </div>
+                </div>
               </div>
             </Reveal>
             <Reveal keyframes={bottomToTopAnimation} delay={300}>
-              <div className="flex flex-col items-center gap-1 w-[350px]">
-                <span className="text-lg xl:text-xl font-bold">
-                  Description:
-                </span>
+              <div className="flex flex-col items-center gap-1 w-full">
+                <span className="text-lg xl:text-xl font-bold">Description:</span>
                 <input
                   type="text"
                   placeholder="Enter Description"
                   value={description}
                   onChange={handleDescriptionChange}
-                  className="w-[80%] sm:w-[90%] px-5 h-10 sm:h-12 bg-white border-b-2 border-primary/50 rounded-full focus:outline-none focus:bg-white focus:text-gray-700 text-gray-700 transition duration-500"
+                  className="w-full px-5 h-10 sm:h-12 bg-white border-b-2 border-primary/50 rounded-full focus:outline-none focus:bg-white focus:text-gray-700 text-gray-700 transition duration-500"
                 />
               </div>
             </Reveal>
-            <div className="flex flex-col items-center gap-1 w-[350px]">
-              {/* {success && <p className="text-green-500 ">{success}</p>} */}
+            <div className="flex flex-col items-center gap-1 w-[90%]">
               <button
                 onClick={handleSubmit}
-                className="bg-zinc-700 text-white w-[80%] sm:w-[90%] h-10 sm:h-12 rounded-full hover:md:bg-primary/40 hover:md:text-gray-700 mt-3 transition duration-500"
+                className="bg-zinc-700 text-white w-full h-10 sm:h-12 rounded-full hover:bg-primary/40 hover:text-gray-700 mt-3 transition duration-500"
               >
                 Submit
               </button>
+              {success && <p className="text-green-500 ">{success}</p>}
             </div>
           </div>
         </div>

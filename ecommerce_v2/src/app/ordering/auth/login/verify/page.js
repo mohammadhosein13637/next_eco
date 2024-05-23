@@ -29,9 +29,9 @@ const VerifyOTPPage = () => {
         },
       });
       const data = await response.json();
-      Cookies.set("token", data.access_token);
+      Cookies.set("token", data.access_token, {expires: 1});
       // Save access token in cookies (code for saving in cookies will be added later)
-      router.push("/ordering/dashboard");
+      router.push("/ordering/linker");
     } catch (error) {
       console.error("Error verifying OTP:", error);
       // Handle error (e.g., display error message to the user)
@@ -71,7 +71,6 @@ const VerifyOTPPage = () => {
                 />
               </div>
             </div>
-
             <div>
               <button
                 onClick={handleVerifyOTP}
@@ -87,5 +86,4 @@ const VerifyOTPPage = () => {
     </div>
   );
 };
-
 export default VerifyOTPPage;

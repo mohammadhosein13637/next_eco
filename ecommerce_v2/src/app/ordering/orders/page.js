@@ -5,6 +5,7 @@ import { baseUrl } from "../constants/Config";
 import { useRouter } from "next/navigation";
 import NavBar from "../navbar/Navbar";
 import Link from "next/link";
+
 export default function OrdersPage() {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState("");
@@ -60,10 +61,10 @@ export default function OrdersPage() {
                 key={order.id}
                 className="relative mx-auto mb-6 flex w-full max-w-xs flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md"
               >
-                <Link href={`/ordering/orders/${order.id}/invoice`}className="w-6/6">
-                <div class="bg-primary/40 hover:bg-primary/55 text-white font-bold py-2 px-4 border-b-4 border-gray-500 hover:border-gray-700 rounded text-center	" onClick={()=>Cookies.set("orderId",order.id)}>
-                  Invoice
-                </div>
+                <Link href={`/ordering/orders/${order.id}/invoice`} className="w-6/6">
+                  <div className="bg-primary/40 hover:bg-primary/55 text-white font-bold py-2 px-4 border-b-4 border-gray-500 hover:border-gray-700 rounded text-center" onClick={() => Cookies.set("orderId", order.id)}>
+                    Invoice
+                  </div>
                 </Link>
                 <a
                   className="relative mx-3 mt-3 flex h-20 overflow-hidden rounded-xl"
@@ -76,20 +77,15 @@ export default function OrdersPage() {
                   </span>
                 </a>
                 <div className="px-5 pb-5 ">
-                  {/* <a
-                    href={order.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-lg font-bold text-dark tracking-tight"
-                  >
-                      {order.link}
-                  </a> */}
                   <div className="mt-2 mb-5">
                     <p className="text-gray-700">
                       <strong>Size:</strong> {order.size}
                     </p>
                     <p className="text-gray-700">
                       <strong>Color:</strong> {order.color}
+                    </p>
+                    <p className="text-gray-700">
+                      <strong>Quantity:</strong> {order.quantity}
                     </p>
                     <p className="text-gray-700">
                       <strong>Description:</strong> {order.description}
