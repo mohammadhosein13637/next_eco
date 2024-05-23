@@ -56,7 +56,7 @@ const TopProducts = ({ handleOrderPopup }) => {
             >
               {/* image section */}
               <div className="h-[100px]">
-                <Image src={offer} className="max-w-[140px] block mx-auto transform -translate-y-20 group-hover:scale-105 duration-300 drop-shadow-md"></Image>
+                <Image src={data.img} className="max-w-[140px] block mx-auto transform -translate-y-20 group-hover:scale-105 duration-300 drop-shadow-md"></Image>
                 {/* <img
                   src={data.img}
                   alt=""
