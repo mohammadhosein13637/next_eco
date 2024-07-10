@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./LoginPage.module.css"; // Import CSS module for styling
 import Cookies from "js-cookie";
+import { baseUrl } from "../../constants/Config";
 
 const LoginPage = () => {
   const [phone, setPhone] = useState("");
@@ -10,7 +11,7 @@ const LoginPage = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch("http://127.0.0.1:8000/auth/login/", {
+      const response = await fetch(`${baseUrl}/auth/login/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

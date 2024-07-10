@@ -81,7 +81,7 @@ const DashboardPage = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `JWT ${Cookies.get("token")}`,
+          "Authorization": `JWT ${Cookies.get("token")}`,
         },
         body: JSON.stringify({
           link: link,

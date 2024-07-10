@@ -26,6 +26,8 @@ const VerifyOTPPage = () => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `JWT ${Cookies.get("token")}`,
+
         },
       });
       const data = await response.json();

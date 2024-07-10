@@ -72,7 +72,7 @@ const InvoicePage = () => {
               d="M15 19l-7-7 7-7"
             ></path>
           </svg>
-          <div className="text-3xl font-bold ">Invoice</div>
+          {/* <div className="text-3xl font-bold ">Invoice</div> */}
         </div>
         {loading ? (
           <div className="text-center text-gray-700">Loading...</div>
@@ -84,9 +84,9 @@ const InvoicePage = () => {
                 className="mx-auto mb-6 w-full max-w-xs flex flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md"
               >
                 <div className="px-5 py-4">
-                  <p className="text-lg font-bold text-primary-dark mb-2">
+                  {/* <p className="text-lg font-bold text-primary-dark mb-2">
                     Invoice {index + 1}
-                  </p>
+                  </p> */}
                   <p className="text-gray-700">
                     <strong>Amount:</strong> {invoice.amount}
                   </p>

@@ -61,11 +61,11 @@ export default function OrdersPage() {
                 key={order.id}
                 className="relative mx-auto mb-6 flex w-full max-w-xs flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md"
               >
-                <Link href={`/ordering/orders/${order.id}/invoice`} className="w-6/6">
+                {/* <Link href={`/ordering/orders/${order.id}/invoice`} className="w-6/6">
                   <div className="bg-primary/40 hover:bg-primary/55 text-white font-bold py-2 px-4 border-b-4 border-gray-500 hover:border-gray-700 rounded text-center" onClick={() => Cookies.set("orderId", order.id)}>
                     Invoice
                   </div>
-                </Link>
+                </Link> */}
                 <a
                   className="relative mx-3 mt-3 flex h-20 overflow-hidden rounded-xl"
                   href={order.link}
