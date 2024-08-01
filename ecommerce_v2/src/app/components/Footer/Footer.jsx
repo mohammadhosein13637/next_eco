@@ -49,7 +49,7 @@ const Footer = () => {
             <h1 className="sm:text-3xl text-xl font-bold sm:text-left text-justify mb-3 flex items-center gap-3">
               <Image src={footerLogo} alt="" className="max-w-[50px]"></Image>
               {/* <img src={footerLogo} alt="" className="max-w-[50px]" /> */}
-              BOBO SHOP
+              Vimba SHOP
             </h1>
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum in

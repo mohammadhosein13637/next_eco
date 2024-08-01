@@ -7,6 +7,7 @@ import { FaCartShopping } from "react-icons/fa6";
 import { FaCaretDown } from "react-icons/fa";
 import DarkMode from "./DarkMode";
 import { useRouter } from "next/navigation";
+import { FaRegUserCircle } from "react-icons/fa";
 
 
 const Menu = [
@@ -66,7 +67,7 @@ const Navbar = ({  }) => {
           <div>
             <a href="#" className="font-bold text-2xl sm:text-3xl flex gap-2">
             <Image src={Logo} alt="Logo" className="w-10"></Image>
-              BOBO Shop
+              Vimba Shop
             </a>
           </div>
 
@@ -89,6 +90,14 @@ const Navbar = ({  }) => {
                 Order
               </span>
               <FaCartShopping className="text-xl text-white drop-shadow-sm cursor-pointer" />
+            </button>
+            <button
+              className="bg-gradient-to-r from-primary to-secondary transition-all duration-200 text-white  py-1 px-4 rounded-full flex items-center gap-3 group" onClick={()=>router.push('/ordering/auth/login')}
+            >
+              <span className="group-hover:block hidden transition-all duration-200" >
+                login/register
+              </span>
+              <FaRegUserCircle  className="text-xl text-white drop-shadow-sm cursor-pointer" />
             </button>
 
             {/* Darkmode Switch */}
